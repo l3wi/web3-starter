@@ -4,7 +4,7 @@ import React, {
   useContext,
   useMemo,
   useEffect,
-  useCallback,
+  useCallback
 } from 'react'
 
 import { useWallet } from 'use-wallet'
@@ -20,7 +20,11 @@ export const Web3Provider = (props) => {
   const { account, connect, status, ethereum, reset, balance } = useWallet()
   // Remember provider preference
   const [provider, setProvider] = useLocalStorage('provider', false)
+  const [ens, setEns] = useState(false)
 
+  const fetchENS = async (address) => {
+    setEns(await web3.lookupAddress(address))
+  }
   // Connect/Disconnect Wallet
   const connectWallet = async (key) => {
     await connect(key)
@@ -52,6 +56,10 @@ export const Web3Provider = (props) => {
     }
   }, [status])
 
+  useEffect(() => {
+    if (account) fetchENS(account)
+  }, [account])
+
   // Once loaded, initalise the provider
   useEffect(() => {
     initProvider()
@@ -70,15 +78,16 @@ export const Web3Provider = (props) => {
       web3,
       balance: ethBalance,
       ethereum,
+      ens
     }),
-    [web3, provider, account, status, balance]
+    [web3, provider, account, status, balance, ens]
   )
 
   // pass the value in provider and return
   return (
     <UseWeb3Context.Provider
       value={{
-        tools,
+        tools
       }}
     >
       {props.children}
