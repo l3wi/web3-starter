@@ -8,12 +8,14 @@ interface Props extends PropsWithChildren {
   name: string | null;
 }
 
+const siteName = "Web3 Starter";
+
 const Layout: React.FC<Props> = ({ children, name }) => {
   const router = useRouter();
   return (
     <main className="px-10 mx-auto max-w-7xl min-h-screen flex flex-col">
       <Head>
-        <title>{name ? `${name} - DSU by Emptyset` : "DSU by Emptyset"}</title>
+        <title>{name ? `${name} - ${siteName}` : siteName}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
