@@ -1,84 +1,58 @@
-import { ConnectKitButton } from "connectkit";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import { useRouter } from "next/router";
+import Layout from "../components/layout";
+import ClientOnly from "../utils/clientOnly";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next dApp</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{" "}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Web3.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl flex items-center">
-          <span className="pr-2">{`Click here to `}</span>
-          <ConnectKitButton />
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Next Docs &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://wagmi.sh/"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Wagmi Docs &rarr;</h3>
-            <p className="mt-4 text-xl">
-              A library of React Hooks to help you develop Web3 Dapps.
-            </p>
-          </a>
-
-          <a
-            href="https://tailwindcss.com/docs/"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">TailwindCSS Docs &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://docs.family.co/connectkit"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">ConnectKit Docs &rarr;</h3>
-            <p className="mt-4 text-xl">
-              A components set for wagmi.sh to manage wallet UX.
-            </p>
-          </a>
+    <Layout name={null}>
+      <div className="pt-8 md:pt-24 flex flex-wrap items-center justify-center">
+        <div className="max-w-sm mb-4 md:mb-16 lg:mb-0 lg:max-w-2xl lg:w-1/2 lg:px-4">
+          <h2 className="mb-4 text-4xl font-bold tracking-tight lg:text-6xl xl:text-7xl">
+            A Web3 Starter
+          </h2>
+          <p className="py-5 mb-5 text-gray-600 lg:text-xl">
+            Simple starter using Wagmi, Rainbow, Tailwind and Next.js.
+          </p>
+          <div className="flex items-center">
+            <button
+              onClick={() => router.push("/")}
+              type="submit"
+              className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 bg-indigo-600  rounded hover:bg-indigo-900 focus:shadow-outline focus:outline-none"
+              data-rounded="rounded-lg"
+              data-primary="gray-900"
+            >
+              Home
+            </button>
+            <a
+              href="#"
+              target={"_blank"}
+              rel={"noopener"}
+              className="inline-flex items-center text-lg text-gray-600 transition-colors duration-200"
+              data-primary="gray-900"
+            >
+              Learn More
+              <svg
+                className="inline-block w-2 ml-2"
+                fill="currentColor"
+                viewBox="0 0 12 12"
+              >
+                <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"></path>
+              </svg>
+            </a>
+          </div>
         </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
+        <div className="relative flex justify-center items-center lg:w-1/2">
+          <div className="">
+            <ClientOnly>
+              <h2>Client Side stuff happens here</h2>
+            </ClientOnly>
+          </div>
+        </div>
+      </div>
+    </Layout>
   );
 };
 
